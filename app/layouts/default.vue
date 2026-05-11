@@ -21,7 +21,7 @@
     <div
       class="fixed top-4 right-4 z-50 flex items-center gap-1 rounded-full bg-white/70 dark:bg-gray-900/70 backdrop-blur-md ring-1 ring-gray-200/60 dark:ring-gray-800 shadow-sm px-1"
     >
-      <AppThemePicker />
+      <!-- <AppThemePicker /> -->
       <AppColorModeButton />
     </div>
 
