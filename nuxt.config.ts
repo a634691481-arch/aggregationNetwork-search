@@ -38,6 +38,11 @@ export default defineNuxtConfig({
     provider: 'iconify'
   },
 
+  // 禁用 OG Image 生成（Cloudflare Pages 不支持 WASM renderer）
+  ogImage: {
+    enabled: false
+  },
+
   // PWA 配置：支持离线访问、添加到主屏幕
   pwa: {
     registerType: 'autoUpdate',
