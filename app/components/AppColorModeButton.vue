@@ -6,6 +6,11 @@
  */
 const colorMode = useColorMode();
 
+// 默认设置为暗色模式
+if (import.meta.client && !colorMode.preference) {
+  colorMode.preference = "dark";
+}
+
 const isDark = computed<boolean>({
   get() {
     return colorMode.value === "dark";
