@@ -4,7 +4,7 @@
     <!-- <AppHeader /> -->
 
     <!-- 欢迎横幅 -->
-    <AppBanner />
+    <!-- <AppBanner /> -->
 
     <!-- 主内容 -->
     <main class="flex-1">
