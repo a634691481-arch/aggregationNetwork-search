@@ -74,13 +74,14 @@ function cancelInstall() {
   >
     <div
       v-if="showInstall"
-      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-4 py-2.5 rounded-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-md ring-1 ring-gray-200 dark:ring-gray-800 shadow-lg"
+      class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 pl-3 pr-2 py-2 rounded-full glass shadow-xl shadow-primary-500/10"
     >
-      <UIcon
-        name="i-lucide-download-cloud"
-        class="size-5 text-primary-500 shrink-0"
-      />
-      <span class="text-sm text-gray-700 dark:text-gray-300">
+      <span
+        class="flex size-7 items-center justify-center rounded-full bg-gradient-to-br from-primary-500 via-violet-500 to-sky-400 shadow-md shadow-primary-500/30"
+      >
+        <UIcon name="i-lucide-download-cloud" class="size-4 text-white" />
+      </span>
+      <span class="text-sm text-slate-700 dark:text-slate-200">
         将本站添加到主屏幕，随时访问
       </span>
       <UButton
@@ -88,6 +89,7 @@ function cancelInstall() {
         color="primary"
         variant="solid"
         icon="i-lucide-download"
+        class="cursor-pointer"
         @click="install"
       >
         安装
@@ -98,6 +100,7 @@ function cancelInstall() {
         variant="ghost"
         icon="i-lucide-x"
         square
+        class="cursor-pointer"
         aria-label="关闭安装提示"
         @click="cancelInstall"
       />

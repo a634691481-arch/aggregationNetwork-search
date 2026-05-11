@@ -41,16 +41,22 @@ onBeforeUnmount(() => {
     leave-from-class="opacity-100 translate-y-0"
     leave-to-class="opacity-0 translate-y-2"
   >
-    <UButton
+    <button
       v-show="visible"
-      icon="i-lucide-arrow-up"
-      color="primary"
-      variant="solid"
-      size="lg"
-      square
-      class="fixed bottom-6 right-6 z-50 shadow-lg rounded-full"
+      type="button"
       aria-label="回到顶部"
+      class="group fixed bottom-6 right-6 z-50 flex size-12 items-center justify-center rounded-full glass overflow-hidden text-primary-600 dark:text-primary-300 hover:text-white transition-colors duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-950"
       @click="scrollToTop"
-    />
+    >
+      <!-- 渐变光斑背景（hover 显现） -->
+      <span
+        class="absolute inset-0 rounded-full bg-gradient-to-br from-primary-500 via-violet-500 to-sky-400 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+        aria-hidden="true"
+      />
+      <UIcon
+        name="i-lucide-arrow-up"
+        class="relative size-5 transition-transform duration-200 group-hover:-translate-y-0.5"
+      />
+    </button>
   </Transition>
 </template>

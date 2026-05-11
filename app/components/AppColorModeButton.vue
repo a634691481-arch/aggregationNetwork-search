@@ -28,6 +28,7 @@ const isDark = computed<boolean>({
       color="neutral"
       variant="ghost"
       size="md"
+      class="cursor-pointer"
       :aria-label="`切换到${isDark ? '亮色' : '暗色'}模式`"
       @click="isDark = !isDark"
     />

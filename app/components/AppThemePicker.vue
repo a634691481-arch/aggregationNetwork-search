@@ -68,6 +68,7 @@ onMounted(() => {
       color="neutral"
       variant="ghost"
       size="md"
+      class="cursor-pointer"
       aria-label="切换主题色"
     />
 
