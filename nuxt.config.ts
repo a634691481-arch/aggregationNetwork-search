@@ -43,6 +43,18 @@ export default defineNuxtConfig({
     enabled: false
   },
 
+  // 颜色模式配置：默认暗色模式
+  colorMode: {
+    preference: 'dark',
+    fallback: 'dark',
+    hid: 'nuxt-color-mode-script',
+    globalName: '__NUXT_COLOR_MODE__',
+    componentName: 'ColorScheme',
+    classPrefix: '',
+    classSuffix: '',
+    storageKey: 'nuxt-color-mode'
+  },
+
   // PWA 配置：支持离线访问、添加到主屏幕
   pwa: {
     registerType: 'autoUpdate',
