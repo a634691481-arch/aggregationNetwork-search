@@ -1,6 +1,10 @@
 @import "tailwindcss";
 @import "@nuxt/ui";
 
+/* ============================================================
+   Design Tokens · 设计令牌（供 Tailwind / 组件 / 子样式引用）
+   ============================================================ */
+
 @theme static {
   --color-background: var(--ui-bg);
   --color-foreground: var(--ui-text);
@@ -66,177 +70,10 @@
 }
 
 /* ============================================================
-   Aurora Glass · 全局美化层
+   Style Modules · 按功能拆分为独立文件
    ============================================================ */
 
-:root {
-  --aurora-1: 59 130 246; /* blue-500 */
-  --aurora-2: 139 92 246; /* violet-500 */
-  --aurora-3: 56 189 248; /* sky-400  */
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-body {
-  font-family:
-    "Inter",
-    "Plus Jakarta Sans",
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    "Segoe UI",
-    Roboto,
-    "Helvetica Neue",
-    Arial,
-    "PingFang SC",
-    "Microsoft YaHei",
-    "Hiragino Sans GB",
-    sans-serif;
-  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-}
-
-/* --- 极光径向背景（深色 / 亮色双适配） --- */
-.aurora-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-}
-.aurora-bg::before,
-.aurora-bg::after {
-  content: "";
-  position: absolute;
-  width: 60rem;
-  height: 60rem;
-  border-radius: 9999px;
-  filter: blur(90px);
-  opacity: 0.55;
-  will-change: transform;
-}
-.aurora-bg::before {
-  top: -20rem;
-  left: -12rem;
-  background: radial-gradient(
-    circle at center,
-    rgb(var(--aurora-1) / 0.55),
-    transparent 60%
-  );
-  animation: aurora-float-a 18s ease-in-out infinite alternate;
-}
-.aurora-bg::after {
-  top: -10rem;
-  right: -18rem;
-  background: radial-gradient(
-    circle at center,
-    rgb(var(--aurora-2) / 0.45),
-    transparent 60%
-  );
-  animation: aurora-float-b 22s ease-in-out infinite alternate;
-}
-.light .aurora-bg::before,
-.light .aurora-bg::after {
-  opacity: 0.35;
-}
-
-@keyframes aurora-float-a {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  100% {
-    transform: translate3d(6rem, 3rem, 0) scale(1.15);
-  }
-}
-@keyframes aurora-float-b {
-  0% {
-    transform: translate3d(0, 0, 0) scale(1.1);
-  }
-  100% {
-    transform: translate3d(-5rem, 4rem, 0) scale(1);
-  }
-}
-
-/* --- 细网格点阵背景 --- */
-.grid-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(to right, rgb(148 163 184 / 0.07) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(148 163 184 / 0.07) 1px, transparent 1px);
-  background-size: 42px 42px;
-  mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
-  -webkit-mask-image: radial-gradient(
-    ellipse at center,
-    black 40%,
-    transparent 80%
-  );
-}
-.light .grid-bg {
-  background-image:
-    linear-gradient(to right, rgb(15 23 42 / 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgb(15 23 42 / 0.05) 1px, transparent 1px);
-}
-
-/* --- 玻璃态卡片 --- */
-.glass {
-  background: rgb(255 255 255 / 0.85);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  border: 1px solid rgb(226 232 240 / 1);
-  box-shadow:
-    0 1px 2px rgb(15 23 42 / 0.04),
-    0 8px 24px -12px rgb(15 23 42 / 0.08);
-}
-.dark .glass {
-  background: rgb(15 23 42 / 0.55);
-  border-color: rgb(51 65 85 / 0.6);
-  box-shadow:
-    0 1px 2px rgb(0 0 0 / 0.35),
-    0 12px 32px -12px rgb(2 6 23 / 0.6);
-}
-
-/* --- 渐变文字 --- */
-.gradient-text {
-  background-image: linear-gradient(
-    120deg,
-    rgb(59 130 246),
-    rgb(139 92 246) 50%,
-    rgb(56 189 248)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* --- 光斑描边按钮（可组合） --- */
-.neon-ring {
-  box-shadow:
-    0 0 0 1px rgb(59 130 246 / 0.35),
-    0 8px 24px -8px rgb(59 130 246 / 0.45);
-}
-
-/* --- 隐藏滚动条但保留滚动 --- */
-.scroll-hide::-webkit-scrollbar {
-  display: none;
-}
-.scroll-hide {
-  scrollbar-width: none;
-}
-
-/* --- Reduced motion --- */
-@media (prefers-reduced-motion: reduce) {
-  .aurora-bg::before,
-  .aurora-bg::after {
-    animation: none;
-  }
-  html {
-    scroll-behavior: auto;
-  }
-}
+@import "./base.css";
+@import "./aurora.css";
+@import "./scrollbar.css";
+@import "./motion.css";

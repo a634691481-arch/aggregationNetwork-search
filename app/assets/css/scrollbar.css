@@ -1,0 +1,64 @@
+/* ============================================================
+   Scrollbar · 滚动条样式
+   ============================================================ */
+
+/* --- 隐藏滚动条但保留滚动 --- */
+.scroll-hide::-webkit-scrollbar {
+  display: none;
+}
+.scroll-hide {
+  scrollbar-width: none;
+}
+
+/* --- 主题色滚动条 · Aurora Glass 风格 --- */
+
+/* Firefox */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(148 163 184 / 0.3) transparent;
+}
+
+.dark {
+  scrollbar-color: rgb(59 130 246 / 0.38) transparent;
+}
+
+/* Chrome / Safari / Edge + 亮色 */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(148 163 184 / 0.3);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(100 116 139 / 0.45);
+}
+
+/* 暗色：蓝紫渐变滚动条 */
+.dark::-webkit-scrollbar-thumb {
+  background: linear-gradient(
+    180deg,
+    rgb(59 130 246 / 0.4),
+    rgb(139 92 246 / 0.4)
+  );
+  border-radius: 9999px;
+}
+
+.dark::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(
+    180deg,
+    rgb(59 130 246 / 0.55),
+    rgb(139 92 246 / 0.55)
+  );
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}

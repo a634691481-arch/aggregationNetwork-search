@@ -1,0 +1,14 @@
+/* ============================================================
+   Motion · 动效与无障碍
+   ============================================================ */
+
+/* --- Reduced motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .aurora-bg::before,
+  .aurora-bg::after {
+    animation: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
