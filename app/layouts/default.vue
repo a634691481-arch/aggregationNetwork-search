@@ -57,5 +57,8 @@
 
     <!-- PWA 安装 / 更新提示 -->
     <AppPwaPrompt />
+
+    <!-- 图片预览 Lightbox（全站单例） -->
+    <AppImagePreview />
   </div>
 </template>

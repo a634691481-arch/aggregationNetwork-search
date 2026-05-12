@@ -147,6 +147,7 @@ const result = ref<JhsjResponse["data"] | null>(null);
 const hasSearched = ref(false);
 
 const toast = useToast();
+const { openPreview } = useImagePreview();
 
 // 热门关键词建议
 const hotKeywords = [
@@ -570,12 +571,11 @@ function normalizeImages(images?: ResourceItem["images"]): string[] {
             >
               <!-- 有图：主图 + 左下角缩略图栈 -->
               <template v-if="normalizeImages(item.images).length > 0">
-                <a
-                  :href="normalizeImages(item.images)[0]"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="absolute inset-0 block cursor-pointer"
-                  :aria-label="`查看${item.note || '资源'}大图`"
+                <button
+                  type="button"
+                  class="absolute inset-0 block cursor-zoom-in"
+                  :aria-label="`预览${item.note || '资源'}图片`"
+                  @click="openPreview(normalizeImages(item.images), 0)"
                 >
                   <img
                     :src="normalizeImages(item.images)[0]"
@@ -587,7 +587,7 @@ function normalizeImages(images?: ResourceItem["images"]): string[] {
                       ($event.target as HTMLImageElement).style.display = 'none'
                     "
                   />
-                </a>
+                </button>
                 <!-- 底部渐黑遮罩 -->
                 <div
                   class="pointer-events-none absolute inset-0 bg-linear-to-t from-slate-950/70 via-slate-950/0 to-slate-950/0"
@@ -597,13 +597,15 @@ function normalizeImages(images?: ResourceItem["images"]): string[] {
                   v-if="normalizeImages(item.images).length > 1"
                   class="absolute bottom-2 left-2 flex gap-1"
                 >
-                  <a
+                  <button
                     v-for="(img, i) in normalizeImages(item.images).slice(1, 4)"
                     :key="`${group.type}-${idx}-thumb-${i}`"
-                    :href="img"
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    type="button"
                     class="block size-8 overflow-hidden rounded-md ring-2 ring-white/70 dark:ring-slate-900/70 hover:ring-primary-400 transition-shadow cursor-pointer"
+                    :aria-label="`预览第 ${i + 2} 张图`"
+                    @click.stop="
+                      openPreview(normalizeImages(item.images), i + 1)
+                    "
                   >
                     <img
                       :src="img"
@@ -616,13 +618,16 @@ function normalizeImages(images?: ResourceItem["images"]): string[] {
                           'none'
                       "
                     />
-                  </a>
-                  <span
+                  </button>
+                  <button
                     v-if="normalizeImages(item.images).length > 4"
-                    class="flex size-8 items-center justify-center rounded-md text-[10px] font-semibold text-white bg-slate-900/60 backdrop-blur ring-2 ring-white/70 dark:ring-slate-900/70"
+                    type="button"
+                    class="flex size-8 items-center justify-center rounded-md text-[10px] font-semibold text-white bg-slate-900/60 backdrop-blur ring-2 ring-white/70 dark:ring-slate-900/70 hover:bg-slate-900/80 cursor-pointer"
+                    :aria-label="`查看全部 ${normalizeImages(item.images).length} 张图`"
+                    @click.stop="openPreview(normalizeImages(item.images), 4)"
                   >
                     +{{ normalizeImages(item.images).length - 4 }}
-                  </span>
+                  </button>
                 </div>
               </template>
 
