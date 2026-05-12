@@ -262,6 +262,68 @@ function normalizeImages(images?: ResourceItem["images"]): string[] {
     })
     .filter((u) => !!u && isHttpUrl(u));
 }
+
+// ===== note 字段处理：接口可能返回含 <span class="highlight-keyword"> 的 HTML 片段 =====
+// 1) 提取高亮片段，其余 HTML 全部剥离；2) 对所有文本做转义防 XSS；3) 仅以 <mark> 呈现高亮。
+function escapeHtml(s: string) {
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+type NoteToken = { type: "text" | "mark"; value: string };
+
+function tokenizeNote(raw?: string): NoteToken[] {
+  if (!raw) return [];
+  // 匹配 <span ... class="...highlight-keyword..." ...>xxx</span>，单/双引号、大小写均兼容
+  const re =
+    /<span[^>]*class\s*=\s*["']?[^"'>]*\bhighlight-keyword\b[^"'>]*["']?[^>]*>([\s\S]*?)<\/span>/gi;
+  const tokens: NoteToken[] = [];
+  let lastIndex = 0;
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(raw)) !== null) {
+    if (m.index > lastIndex) {
+      tokens.push({ type: "text", value: raw.slice(lastIndex, m.index) });
+    }
+    tokens.push({ type: "mark", value: m[1] ?? "" });
+    lastIndex = re.lastIndex;
+  }
+  if (lastIndex < raw.length) {
+    tokens.push({ type: "text", value: raw.slice(lastIndex) });
+  }
+  // 兜底：再剥一次残留标签，并做简单空白折叠
+  return tokens
+    .map((t) => ({
+      type: t.type,
+      value: t.value.replace(/<[^>]+>/g, "").replace(/\s+/g, " "),
+    }))
+    .filter((t) => t.value.length > 0);
+}
+
+// 纯文本 note，用于 title / alt / aria-label
+function plainNote(raw?: string): string {
+  const txt = tokenizeNote(raw)
+    .map((t) => t.value)
+    .join("")
+    .trim();
+  return txt || "未命名资源";
+}
+
+// 带高亮的安全 HTML，用于 v-html 渲染
+function renderNote(raw?: string): string {
+  const tokens = tokenizeNote(raw);
+  if (tokens.length === 0) return escapeHtml("未命名资源");
+  return tokens
+    .map((t) =>
+      t.type === "mark" ?
+        `<mark class="rounded px-0.5 bg-amber-200/70 dark:bg-amber-400/25 text-amber-900 dark:text-amber-200">${escapeHtml(t.value)}</mark>`
+      : escapeHtml(t.value),
+    )
+    .join("");
+}
 </script>
 
 <template>
@@ -574,12 +636,12 @@ function normalizeImages(images?: ResourceItem["images"]): string[] {
                 <button
                   type="button"
                   class="absolute inset-0 block cursor-zoom-in"
-                  :aria-label="`预览${item.note || '资源'}图片`"
+                  :aria-label="`预览${plainNote(item.note)}图片`"
                   @click="openPreview(normalizeImages(item.images), 0)"
                 >
                   <img
                     :src="normalizeImages(item.images)[0]"
-                    :alt="item.note || '资源封面'"
+                    :alt="plainNote(item.note)"
                     loading="lazy"
                     referrerpolicy="no-referrer"
                     class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.04]"
@@ -673,10 +735,9 @@ function normalizeImages(images?: ResourceItem["images"]): string[] {
             <div class="flex flex-col flex-1 p-4">
               <h3
                 class="text-sm font-semibold text-slate-900 dark:text-white leading-snug line-clamp-2 mb-2 min-h-10"
-                :title="item.note || '未命名资源'"
-              >
-                {{ item.note || "未命名资源" }}
-              </h3>
+                :title="plainNote(item.note)"
+                v-html="renderNote(item.note)"
+              />
 
               <!-- 元信息 -->
               <div
