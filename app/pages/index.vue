@@ -327,7 +327,7 @@ function renderNote(raw?: string): string {
 </script>
 
 <template>
-  <div class="mx-auto max-w-6xl xl:max-w-7xl px-4 pb-16 sm:px-6 lg:pb-24">
+  <div class="mx-auto max-w-6xl xl:max-w-8xl px-4 pb-16 sm:px-6 lg:pb-24">
     <!-- ============ Hero 区 ============ -->
     <section class="pt-0">
       <div class="flex flex-col items-center text-center">
