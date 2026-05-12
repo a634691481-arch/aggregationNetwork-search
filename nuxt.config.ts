@@ -57,9 +57,11 @@ export default defineNuxtConfig({
 
   // PWA 配置：支持离线访问、添加到主屏幕
   pwa: {
-    // 开发环境禁用 PWA，避免浏览器请求 /sw.js 时 Vue Router 报 "No match found" 警告
+    // 开发环境禁用 PWA（避免 /sw.js 路由警告）；生产 & preview 照常打开
     disable: process.env.NODE_ENV === 'development',
     registerType: 'autoUpdate',
+    // 写入 <head> 的 manifest 链接和 favicon（避免 “Manifest 未注册”）
+    injectRegister: 'auto',
     manifest: {
       name: '聚合网盘搜索',
       short_name: '网盘搜索',
