@@ -9,8 +9,10 @@ export default defineNuxtConfig({
   site: {
     url: 'https://example.com',
     name: '聚合网盘搜索',
-    description: '全网短剧 / 影视 / 软件 / 资源聚合搜索，支持 12 种网盘类型。',
+    description:
+      '聚合网盘搜索工具，一次搜索直达全网 12 大网盘（百度 / 阿里 / 夸克 / UC / 天翼 / 移动 / 115 / PikPak / 迅雷 / 123 / 磁力 / 电驴），覆盖短剧、影视、综艺、动漫、软件、游戏、电子书、学习资料等资源，免登录，附提取码，支持 PWA 离线访问。',
     defaultLocale: 'zh-CN',
+    indexable: true,
   },
 
   // robots.txt 配置：允许所有爬虫，禁止爬取 /api
