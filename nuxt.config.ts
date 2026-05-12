@@ -97,8 +97,10 @@ export default defineNuxtConfig({
       ],
     },
     workbox: {
-      globPatterns: ['**/*.{js,css,html,png,svg,ico,woff2}'],
-      navigateFallback: '/',
+      // SSR（nuxt build）模式下 .output/public 不会生成 index.html，
+      // 因此不要设置 navigateFallback（否则会抛 non-precached-url: [{"url":"/"}]）。
+      // 若未来改用 nuxt generate（SSG），可再加回 navigateFallback: '/' 或 '/index.html'。
+      globPatterns: ['**/*.{js,css,png,svg,ico,woff2}'],
       cleanupOutdatedCaches: true,
       runtimeCaching: [
         {
