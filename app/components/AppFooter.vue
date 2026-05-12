@@ -9,7 +9,7 @@ const year = new Date().getFullYear();
 <template>
   <footer class="mt-12 border-t border-slate-200/70 dark:border-slate-800/70">
     <div
-      class="mx-auto flex max-w-6xl flex-col items-center gap-4 px-4 py-4 sm:flex-row sm:justify-between sm:gap-6 sm:px-6"
+      class="mx-auto flex max-w-6xl xl:max-w-7xl flex-col items-center gap-4 px-4 py-4 sm:flex-row sm:justify-between sm:gap-6 sm:px-6"
     >
       <div class="flex items-center gap-2.5">
         <span
