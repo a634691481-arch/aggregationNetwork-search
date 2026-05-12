@@ -34,7 +34,7 @@
     </ULink>
 
     <!-- 右侧操作胶囊 -->
-    <div
+    <!-- <div
       class="pointer-events-auto flex items-center gap-0.5 rounded-full glass px-1 py-1"
     >
       <AppThemePicker />
@@ -43,6 +43,6 @@
         aria-hidden="true"
       />
       <AppColorModeButton />
-    </div>
+    </div> -->
   </header>
 </template>
