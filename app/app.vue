@@ -16,6 +16,11 @@ useSeoMeta({
   ogLocale: "zh_CN",
   twitterCard: "summary_large_image",
 });
+
+import { computed } from "vue";
+
+const colorMode = useColorMode();
+const isDark = computed(() => colorMode.value === "dark");
 </script>
 
 <template>
@@ -24,5 +29,17 @@ useSeoMeta({
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
+
+    <!-- 全屏粒子背景（仅客户端渲染，深浅色自适应） -->
+    <ClientOnly>
+      <AppParticlesBg
+        :key="isDark ? 'dark' : 'light'"
+        class="pointer-events-none absolute inset-0 z-0"
+        :quantity="100"
+        :ease="100"
+        :staticity="10"
+        :color="isDark ? '#FFFFFF' : '#000000'"
+      />
+    </ClientOnly>
   </UApp>
 </template>

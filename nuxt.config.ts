@@ -57,6 +57,8 @@ export default defineNuxtConfig({
 
   // PWA 配置：支持离线访问、添加到主屏幕
   pwa: {
+    // 开发环境禁用 PWA，避免浏览器请求 /sw.js 时 Vue Router 报 "No match found" 警告
+    disable: process.env.NODE_ENV === 'development',
     registerType: 'autoUpdate',
     manifest: {
       name: '聚合网盘搜索',
