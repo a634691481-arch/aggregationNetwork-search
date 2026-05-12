@@ -74,18 +74,22 @@ export default defineNuxtConfig({
           src: 'pwa-192x192.png',
           sizes: '192x192',
           type: 'image/png',
+          purpose: 'any',
         },
         {
-          src: 'pwa-512x512.png',
-          sizes: '512x512',
+          src: 'pwa-192x192.png',
+          sizes: '192x192',
           type: 'image/png',
+          purpose: 'maskable',
         },
-        {
-          src: 'pwa-512x512.png',
-          sizes: '512x512',
-          type: 'image/png',
-          purpose: 'any maskable',
-        },
+        // TODO: 补一张 512x512 的 png 放到 public/pwa-512x512.png
+        // 然后把下面这项取消注释，Chrome 可安装提示会更稳
+        // {
+        //   src: 'pwa-512x512.png',
+        //   sizes: '512x512',
+        //   type: 'image/png',
+        //   purpose: 'any maskable',
+        // },
       ],
     },
     workbox: {
