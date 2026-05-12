@@ -21,5 +21,9 @@
     <AppBackToTop />
     <AppPwaPrompt />
     <AppImagePreview />
+
+    <ClientOnly>
+      <AppSleekLineCursor />
+    </ClientOnly>
   </div>
 </template>

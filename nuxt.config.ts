@@ -127,5 +127,14 @@ export default defineNuxtConfig({
       enabled: false, // 开发环境默认关闭，需要调试时改为 true
       type: 'module',
     },
-  }
+  },
+
+  // Vite 依赖预构建：把 CJS 包提前打包成 ESM，避免首屏发现新依赖时触发整页刷新
+  vite: {
+    optimizeDeps: {
+      include: [
+        '@inspira-ui/plugins', // CJS
+      ],
+    },
+  },
 })
