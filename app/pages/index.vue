@@ -333,6 +333,8 @@ function renderNote(raw?: string): string {
       <div class="flex flex-col items-center text-center">
         <!-- 徽章 -->
         <div
+          data-aos="fade-down"
+          data-aos-duration="600"
           class="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium text-primary-700 dark:text-primary-300 bg-primary-50/80 dark:bg-primary-950/40 ring-1 ring-primary-200/60 dark:ring-primary-900/50 backdrop-blur-sm"
         >
           <span class="relative flex size-1.5">
@@ -348,6 +350,8 @@ function renderNote(raw?: string): string {
 
         <!-- 主标题 -->
         <h1
+          data-aos="fade-up"
+          data-aos-delay="100"
           class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-[1.1]"
         >
           <span class="text-slate-900 dark:text-white">发现全网资源，</span>
@@ -356,6 +360,8 @@ function renderNote(raw?: string): string {
 
         <!-- 副标题 -->
         <p
+          data-aos="fade-up"
+          data-aos-delay="200"
           class="mt-5 max-w-2xl text-base sm:text-lg text-slate-600 dark:text-slate-400 leading-relaxed"
         >
           短剧 · 影视 · 软件 · 电子书，一次搜索，<span
@@ -370,6 +376,9 @@ function renderNote(raw?: string): string {
     <!-- ============ 搜索卡（玻璃态） ============ -->
     <section class="mt-10">
       <div
+        data-aos="fade-up"
+        data-aos-delay="300"
+        data-aos-duration="800"
         class="relative glass rounded-2xl p-4 sm:p-6 shadow-xl shadow-primary-500/5"
       >
         <!-- 顶部渐变细条 -->
@@ -489,6 +498,8 @@ function renderNote(raw?: string): string {
     <!-- ============ 错误提示 ============ -->
     <UAlert
       v-if="error"
+      data-aos="fade-down"
+      data-aos-duration="400"
       color="error"
       variant="soft"
       icon="i-lucide-alert-triangle"
@@ -500,7 +511,12 @@ function renderNote(raw?: string): string {
     />
 
     <!-- ============ 加载中 ============ -->
-    <div v-if="loading" class="flex flex-col items-center py-20">
+    <div
+      v-if="loading"
+      data-aos="zoom-in"
+      data-aos-duration="400"
+      class="flex flex-col items-center py-20"
+    >
       <div class="relative">
         <div
           class="size-14 rounded-full border-2 border-primary-200 dark:border-primary-900/40"
@@ -521,6 +537,8 @@ function renderNote(raw?: string): string {
     <!-- ============ 空状态（已搜索但无结果） ============ -->
     <div
       v-else-if="hasSearched && !error && totalCount === 0"
+      data-aos="fade-up"
+      data-aos-duration="500"
       class="mt-10 glass rounded-2xl text-center py-16 px-6"
     >
       <div
@@ -549,6 +567,8 @@ function renderNote(raw?: string): string {
     >
       <!-- 统计条（玻璃态 + 渐变） -->
       <div
+        data-aos="fade-right"
+        data-aos-duration="700"
         class="relative overflow-hidden rounded-2xl glass p-5 ring-1 ring-primary-200/50 dark:ring-primary-900/40"
       >
         <div
@@ -595,7 +615,11 @@ function renderNote(raw?: string): string {
       <!-- 分组 -->
       <div v-for="group in groupedResults" :key="group.type" class="space-y-5">
         <!-- 分组标题 -->
-        <div class="flex items-center gap-3">
+        <div
+          data-aos="fade-left"
+          data-aos-duration="600"
+          class="flex items-center gap-3"
+        >
           <div
             :class="[
               'flex size-10 items-center justify-center rounded-xl bg-linear-to-br ring-1',
@@ -625,6 +649,8 @@ function renderNote(raw?: string): string {
           <article
             v-for="(item, idx) in group.items"
             :key="`${group.type}-${idx}`"
+            data-aos="fade-up"
+            :data-aos-delay="idx * 80"
             class="group relative flex flex-col overflow-hidden rounded-2xl glass transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-primary-500/15 hover:ring-primary-300/60 dark:hover:ring-primary-700/60"
           >
             <!-- 封面区：有图 = 头图，无图 = 渐变占位 -->
@@ -842,6 +868,9 @@ function renderNote(raw?: string): string {
     <!-- ============ 首次进入提示 ============ -->
     <div
       v-else-if="!hasSearched"
+      data-aos="fade-up"
+      data-aos-delay="400"
+      data-aos-duration="700"
       class="mt-10 glass rounded-2xl p-8 sm:p-10 text-center"
     >
       <div class="relative mx-auto flex size-16 items-center justify-center">
@@ -871,6 +900,8 @@ function renderNote(raw?: string): string {
         class="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl mx-auto text-left"
       >
         <div
+          data-aos="fade-right"
+          data-aos-delay="500"
           class="flex items-start gap-3 rounded-xl p-3 ring-1 ring-slate-200/70 dark:ring-slate-800/70 bg-white/50 dark:bg-slate-900/40"
         >
           <div
@@ -890,6 +921,8 @@ function renderNote(raw?: string): string {
           </div>
         </div>
         <div
+          data-aos="fade-right"
+          data-aos-delay="600"
           class="flex items-start gap-3 rounded-xl p-3 ring-1 ring-slate-200/70 dark:ring-slate-800/70 bg-white/50 dark:bg-slate-900/40"
         >
           <div
@@ -909,6 +942,8 @@ function renderNote(raw?: string): string {
           </div>
         </div>
         <div
+          data-aos="fade-right"
+          data-aos-delay="700"
           class="flex items-start gap-3 rounded-xl p-3 ring-1 ring-slate-200/70 dark:ring-slate-800/70 bg-white/50 dark:bg-slate-900/40"
         >
           <div

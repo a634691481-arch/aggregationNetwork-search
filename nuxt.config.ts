@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: ['@nuxt/ui', '@formkit/auto-animate/nuxt', '@nuxtjs/seo', '@vite-pwa/nuxt'],
+  modules: ['@nuxt/ui', '@formkit/auto-animate/nuxt', '@nuxtjs/seo', '@vite-pwa/nuxt', 'nuxt-aos'],
   css: ['~/assets/css/main.css'],
 
   // 全站 SEO 基础信息（@nuxtjs/seo 会自动注入到 sitemap/robots/og-image/schema-org 等子模块）
@@ -133,6 +133,18 @@ export default defineNuxtConfig({
       enabled: false, // 开发环境默认关闭，需要调试时改为 true
       type: 'module',
     },
+  },
+
+  // AOS 滚动动画配置
+  aos: {
+    // 全局：动画只播放一次（滚动到下方后再回滚不会重播，体验更干净）
+    once: true,
+    // 触发偏移量：元素进入视口 80px 后开始动画
+    offset: 80,
+    // 默认动画时长
+    duration: 600,
+    // 默认缓动曲线
+    easing: 'ease-out-cubic',
   },
 
   // Vite 依赖预构建：把 CJS 包提前打包成 ESM，避免首屏发现新依赖时触发整页刷新
