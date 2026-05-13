@@ -1662,5 +1662,8 @@ watch(selectedTypes, (v) => {
         </div>
       </div>
     </div>
+
+    <!-- ============ 赞赏（悬浮 FAB + 弹窗，自带定位，放在 v-if 链外） ============ -->
+    <AppSponsor />
   </div>
 </template>
