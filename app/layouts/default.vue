@@ -1,3 +1,8 @@
+<script setup lang="ts">
+// 桌面端检测：粒子背景仅在电脑端渲染，移动/平板端隐藏以减少性能开销
+const { isDesktop } = useDesktopOnly();
+</script>
+
 <template>
   <div
     class="relative flex flex-col min-h-screen bg-linear-to-b from-slate-50 via-white to-slate-50 dark:from-slate-950 dark:via-slate-950 dark:to-slate-900 text-slate-900 dark:text-slate-100 overflow-x-hidden"
@@ -25,7 +30,7 @@
     <AppImagePreview />
 
     <!-- 精准悬浮光标 -->
-    <ClientOnly>
+    <ClientOnly v-if="isDesktop">
       <AppSleekLineCursor />
     </ClientOnly>
   </div>
