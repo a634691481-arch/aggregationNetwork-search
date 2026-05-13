@@ -139,6 +139,9 @@ import { computed } from "vue";
 
 const colorMode = useColorMode();
 const isDark = computed(() => colorMode.value === "dark");
+
+// 桌面端检测：粒子背景仅在电脑端渲染，移动/平板端隐藏以减少性能开销
+const { isDesktop } = useDesktopOnly();
 </script>
 
 <template>
@@ -148,8 +151,8 @@ const isDark = computed(() => colorMode.value === "dark");
       <NuxtPage />
     </NuxtLayout>
 
-    <!-- 全屏粒子背景（仅客户端渲染，深浅色自适应） -->
-    <ClientOnly>
+    <!-- 全屏粒子背景（仅桌面端渲染 + 仅客户端，深浅色自适应） -->
+    <ClientOnly v-if="isDesktop">
       <AppParticlesBg
         :key="isDark ? 'dark' : 'light'"
         class="pointer-events-none absolute inset-0 z-0"
