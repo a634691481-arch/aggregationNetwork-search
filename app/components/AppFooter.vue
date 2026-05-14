@@ -42,5 +42,32 @@ const year = new Date().getFullYear();
         <span>© {{ year }} All rights reserved</span>
       </div>
     </div>
+
+    <!-- 其他开源网站 -->
+    <div class="mx-auto max-w-7xl xl:max-w-8xl px-4 pb-4 sm:px-6">
+      <div
+        class="flex flex-wrap items-center justify-center gap-2 text-xs text-slate-400 dark:text-slate-500"
+      >
+        <span class="mr-1">其他开源网站：</span>
+        <a
+          href="https://y66.mooon.vip/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-1 text-slate-600 transition-colors hover:bg-slate-200 hover:text-slate-800 dark:bg-slate-800/60 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+        >
+          <UIcon name="i-lucide-search" class="size-3" />
+          网盘搜索
+        </a>
+        <a
+          href="https://book.mooon.vip/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2 py-1 text-slate-600 transition-colors hover:bg-slate-200 hover:text-slate-800 dark:bg-slate-800/60 dark:text-slate-400 dark:hover:bg-slate-800 dark:hover:text-slate-200"
+        >
+          <UIcon name="i-lucide-book-open" class="size-3" />
+          电子礼簿
+        </a>
+      </div>
+    </div>
   </footer>
 </template>
